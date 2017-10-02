@@ -22,10 +22,10 @@ data=data(:,1:end-1);
 %Real-world datasets are of various formats, you need to write your own code.
 %Your code need to declare two variables, which are:
 %"data" for original data w/o labels, e.g. X and Y coordinate for each column
-%"answer" for labels, must be numerical. To convert, use "answer=grp2idx(categorical(answer));"
-% data=load("..\..\res\ClusteringDataset\Realworld\Ecoli\ecoli.data");
-% answer=data(:,end);
-% data=data(:,1:end-1);
+%"answer" for labels, must be numerical. To convert from string labels, use "answer=grp2idx(categorical(answer));"
+% data=load("..\..\res\ClusteringDataset\Realworld\Wine\wine.data");
+% answer=data(:,1);
+% data=data(:,2:end);
 
 %Load OlivettiFaces dataset
 % [data,answer]=OlivettiReader(15,15,90);
