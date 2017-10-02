@@ -61,13 +61,13 @@ There is another method to read your own dataset. At the line 3-4, you can direc
 
 In this section, we focus on other parameters passed to the algorithm at the line 11 in each entrance file.
 
-#### `AutoPick`
+#### AutoPick
 
-It indicates how many centers should be automatically chosen. If omitted or assigned with 0, you can choose centers manually from the $\rho$-$\delta$ decision graph or sorted $\gamma$ graph.
+It indicates how many centers should be automatically chosen. If omitted or assigned with 0, you can choose centers manually from the rho-delta decision graph or sorted gamma graph.
 
-For manually choosing, if you click on the decision graph, the points at the upper right of where you click will be marked as centers, and a red horizontal line will be drawn on the $\gamma$ graph indicating the $\gamma$ value of where you just click.
+For manually choosing, if you click on the decision graph, the points at the upper right of where you click will be marked as centers, and a red horizontal line will be drawn on the gamma graph indicating the gamma value of where you just click.
 
-If you click on the $\gamma$ graph, points with higher $\gamma$ value than where you click will be marked as centers, and a red line will also be drawn.
+If you click on the gamma graph, points with higher gamma value than where you click will be marked as centers, and a red line will also be drawn.
 
 #### Distance
 
