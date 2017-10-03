@@ -35,8 +35,8 @@ For other synthetic datasets (DIM512, A1 and S2), uncomment the line 10-11, 12-1
 
 For UCI real-world datasets, you need to refer to another file `/SnnDpc/res/ClusteringDataset/ReadRealworld.txt`. This file is arranged in the format below
 
->Dataset name (1 line)
->Number of clusters (1 line)
+>Dataset name (1 line)<br/>
+>Number of clusters (1 line)<br/>
 >How to read this dataset (2 or 3 lines)
 
 You need to copy the code from the part *How to read this dataset* to `ReadDataset.m`. Line 26-28 is an example to read the dataset Wine.
