@@ -8,7 +8,7 @@ Some functions like `squareform()` and `pdist()` require "Statistics and Machine
 
 ## Simplest Demo
 
-There are 3 entrance file, `SnnDpcHelper.m`, `KnnDpcHelper.m` and `DpcHelper.m`.
+There are 3 entrance files, `SnnDpcHelper.m`, `KnnDpcHelper.m` and `DpcHelper.m`.
 To run the simplest demo which shows the best result of three clustering algorithms on dataset Pathbased, you just need to open one of the three source file in Matlab, then click "Run" in the "Editor' tab.
 
 ## Customization
@@ -17,7 +17,7 @@ All modification should only be made in the entrance files and `ReadDataset.m`.
 
 ### Basic Parameters
 
-For all three algorithm, the parameter (`K` or `percent`) is assigned at the line 7,8 in each entrance file. 
+For all three algorithms, the parameter (`K` or `percent`) is assigned at the line 7,8 in each entrance file. 
 
 The parameter should be a single number or a vector array. 
 
