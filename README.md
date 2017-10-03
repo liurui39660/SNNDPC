@@ -2,7 +2,7 @@
 
 ## Requirement
 
-The source code is written by Matlab r2017a. The versions lower than it have not been tested.
+The source code is written by Matlab r2017a. Versions lower than it have not been tested.
 
 Some functions like `squareform()` and `pdist()` require "Statistics and Machine Learning Toolbox" product.
 
@@ -63,7 +63,7 @@ In this section, we focus on other parameters passed to the algorithm at the lin
 
 #### AutoPick
 
-It indicates how many centers should be automatically chosen. If omitted or assigned with 0, you can choose centers manually from the rho-delta decision graph or sorted gamma graph.
+It indicates how many centers should be automatically chosen. If omitted or assigned with 0, you can choose centers manually from the decision graph or sorted gamma graph.
 
 For manually choosing, if you click on the decision graph, the points at the upper right of where you click will be marked as centers, and a red horizontal line will be drawn on the gamma graph indicating the gamma value of where you just click.
 
@@ -79,6 +79,21 @@ It will check whether the matrix passed is symmetric and the distance to a point
 
 #### Ui
 
-If true, a figure with 4 subgraph will be displayed after each call to `SnnDpc()`, `KnnDpc()` or `Dpc()`. It is usually applied when `K` is a constant (including 0) and `AutoPick` is 0.
+If `true`, a figure with 4 subgraphs will be displayed after each call to `SnnDpc()`, `KnnDpc()` or `Dpc()`. It is usually applied when `K` is a constant.
 
-If false, nothing will be displayed after each call. It is usually applied when `K` is an array and `AutoPick` is not 0.
+If `false`, the result will not be displayed after each call. It is usually applied when `K` is an array and `AutoPick` is not 0. And this is the default value.
+
+#### Kernel
+
+This parameter is only available for traditional DPC.
+
+If `'Gaussian'`, the algorithm will use Gaussian kernel to calculate rho. And this is the default value.
+
+If `'Cutoff'`, the algorithm will use cut off kernel to calculate rho.
+
+### Result
+
+There are 4 attributes shown in the result, adjusted mutual information (AMI), adjusted rand index (ARI), Fowlkes-Mallows index (FMI) and the basic parameter (`K` or `percent`).
+
+By default, only the best result will be shown. If you want to see all the results, remove the semicolon at the end of line 15 in each entrance file.
+
