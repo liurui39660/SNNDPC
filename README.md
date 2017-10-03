@@ -35,8 +35,8 @@ For other synthetic datasets (DIM512, A1 and S2), uncomment the line 10-11, 12-1
 
 For UCI real-world datasets, you need to refer to another file `/SnnDpc/res/ClusteringDataset/ReadRealworld.txt`. This file is arranged in the format below
 
->Dataset name (1 line)<br/>
->Number of clusters (1 line)<br/>
+>Dataset name (1 line)
+>Number of clusters (1 line)
 >How to read this dataset (2 or 3 lines)
 
 You need to copy the code from the part *How to read this dataset* to `ReadDataset.m`. Line 26-28 is an example to read the dataset Wine.
@@ -97,3 +97,38 @@ There are 4 attributes shown in the result, adjusted mutual information (AMI), a
 
 By default, only the best result will be shown. If you want to see all the results, remove the semicolon at the end of line 15 in each entrance file.
 
+## Library
+
+There are some useful functions provided in `Library.m`. Since they are related to display of results, they all have a prefix `Ui`.
+
+Notice that they are static functions of class Library, so you need to specify the class name or use `import Library.*`. An example for direct call is `Library.UiReplotGamma(result);`
+
+### `Re` Series
+
+There are 4 functions in the `Re` series, `UiReshowDecision()`, `UiReplotGamma()`, `UiReplotResultAndRho()` and `UiReplotResultAndDelta()`.
+
+Since each call to `SnnDpc()`, `KnnDpc()` and `Dpc()` returns a structure `result`, `Re` series function use this and some additional parameters to display results.
+
+Except for `UiReplotGamma()`, other 3 functions also need the matrix `data` which can be obtained from `ReadDataset()`, since `result` doesn't contain the original data.
+
+You can pass additional parameters to these functions to specify where to display the result. The first additional parameter specifies the figure to display results, while subsequent additional parameters specify the axes. 
+
+The return value of each function are a figure variable and some axes variables, in case you need them for other usage.
+
+### Others
+
+#### UiShowFigure()
+
+If no additional parameters specifying the figure are passed to others `Ui` functions like `UiReshowDecision()`, the function `UiShowFigure()` will be called to create a "large enough" figure to store the result.
+
+By default, it occupies about half of your screen.
+
+#### UiGetColormap()
+
+To change the color map, you can modify the line 56. There are lots of built-in color maps like 'hsv'(our choice), 'jet', 'hot', 'cool', etc.
+
+The line 59 limits the RGB value of color map. The default one limits the value between 0.4 and 0.9, so they are neither too light nor too dark.
+
+## Issues, Questions, etc
+
+Please report issues here on the github page or contact "xxliuruiabc@163.com"
