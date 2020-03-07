@@ -10,13 +10,11 @@ using namespace SNNDPC;
 int main(int argc, char* argv[]) {
 	// const auto pathDatabase = SOLUTION_DIR"data/Flame.tsv";
 	// const int k = 5, n = 240, d = 2, nc = 2;
-	// const auto pathDatabase = SOLUTION_DIR"data/S2.tsv";
-	// const int k = 35, n = 5000, d = 2, nc = 15;
-	const auto pathDatabase = SOLUTION_DIR"data/Birch1.tsv";
-	const int k = 35, n = 100000, d = 2, nc = 100;
+	const auto pathDatabase = SOLUTION_DIR"data/S2.tsv";
+	const int k = 35, n = 5000, d = 2, nc = 15;
 	// --------------------------------------------------------------------------------
 	double data[n * d];
-	int truth[n], centroid[nc], assignment[n];;
+	int truth[n], centroid[nc], assignment[n];
 	FILE* file;
 	fopen_s(&file, pathDatabase, "r");
 	for (int i = 0; i < n; i++)
@@ -33,4 +31,5 @@ int main(int argc, char* argv[]) {
 	char command[1u << 10u];
 	sprintf_s(command, R"(python "%s" "%s" "%s")", SOLUTION_DIR"util/EvaluateAssignment.py", pathTruth, pathPredict);
 	system(command);
+	printf("Results at %s\n", SOLUTION_DIR"temp/");
 }
