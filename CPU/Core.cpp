@@ -61,11 +61,11 @@ struct Core<T>::TBB_ComputeNeighbor {
 	void operator()(const blocked_range<int>& range) const {
 		for (auto i = range.begin(); i != range.end(); i++) {
 #else
-			template<typename T>
-			void Core<T>::ComputeNeighbor() {
-				indexDistanceAsc = new int[n * n];
-				indexNeighbor = new int[n * k];
-				for (int i = 0; i < n; i++) {
+template<typename T>
+void Core<T>::ComputeNeighbor() {
+	indexDistanceAsc = new int[n * n];
+	indexNeighbor = new int[n * k];
+	for (int i = 0; i < n; i++) {
 #endif // PARALLEL_PROVIDER_IntelTBB
 			iota(indexDistanceAsc + i * n, indexDistanceAsc + i * n + n, 0);
 			sort(indexDistanceAsc + i * n, indexDistanceAsc + i * n + n, [&](int a, int b) { return distance[i * n + a] < distance[i * n + b]; });
@@ -98,11 +98,11 @@ struct Core<T>::TBB_ComputeSharedNeighbor {
 	void operator()(const blocked_range<int>& range) const {
 		for (auto i = range.begin(); i != range.end(); i++) {
 #else
-			template<typename T>
-			void Core<T>::ComputeSharedNeighbor() {
-				indexSharedNeighbor = new int[n * n * k];
-				numSharedNeighbor = new int[n * n];
-				for (int i = 0; i < n; i++) {
+template<typename T>
+void Core<T>::ComputeSharedNeighbor() {
+	indexSharedNeighbor = new int[n * n * k];
+	numSharedNeighbor = new int[n * n];
+	for (int i = 0; i < n; i++) {
 #endif // PARALLEL_PROVIDER_IntelTBB
 			numSharedNeighbor[i * n + i] = 0;
 			for (int j = 0; j < i; j++) {
@@ -145,10 +145,10 @@ struct Core<T>::TBB_ComputeSimilarity {
 	void operator()(const blocked_range<int>& range) const {
 		for (auto i = range.begin(); i != range.end(); i++) {
 #else
-			template<typename T>
-			void Core<T>::ComputeSimilarity() {
-				similarity = new T[n * n];
-				for (int i = 0; i < n; i++) {
+template<typename T>
+void Core<T>::ComputeSimilarity() {
+	similarity = new T[n * n];
+	for (int i = 0; i < n; i++) {
 #endif // PARALLEL_PROVIDER_IntelTBB
 			similarity[i * n + i] = 0;
 			for (int j = 0; j < i; j++) {
@@ -190,11 +190,11 @@ struct Core<T>::TBB_ComputeRho {
 		auto similarityDesc = new T[n];
 		for (auto i = range.begin(); i != range.end(); i++) {
 #else
-			template<typename T>
-			void Core<T>::ComputeRho() {
-				rho = new T[n];
-				auto similarityDesc = new T[n];
-				for (int i = 0; i < n; i++) {
+template<typename T>
+void Core<T>::ComputeRho() {
+	rho = new T[n];
+	auto similarityDesc = new T[n];
+	for (int i = 0; i < n; i++) {
 #endif // PARALLEL_PROVIDER_IntelTBB
 			copy(similarity + i * n, similarity + (i + 1) * n, similarityDesc);
 			sort(similarityDesc, similarityDesc + n, greater<>());
