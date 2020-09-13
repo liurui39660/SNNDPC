@@ -8,20 +8,20 @@ int main(int argc, char* argv[]) {
 	// Parameter
 	// --------------------------------------------------------------------------------
 
-	// const auto pathDatabase = SOLUTION_DIR"data/Flame.tsv";
-	// const int k = 5, numPoint = 240, numDim = 2, numCentroid = 2;
-
-	const auto pathDatabase = SOLUTION_DIR"data/S2.tsv";
-	const int k = 35, numPoint = 5000, numDim = 2, numCentroid = 15;
+	const auto pathData = SOLUTION_DIR"data/S2.tsv";
+	const int k = 35;
+	const int n = 5000; // Number of data points
+	const int d = 2; // Dimension
+	const int nc = 15; // Number of centroids
 
 	// Read dataset
 	// --------------------------------------------------------------------------------
 
-	int label[numPoint];
-	float data[numPoint * numDim];
-	const auto fileData = fopen(pathDatabase, "r");
-	for (int i = 0; i < numPoint; i++)
-		fscanf(fileData, "%f %f %d\n", &data[i * numDim], &data[i * numDim + 1], &label[i]);
+	int label[n];
+	float data[n * d];
+	const auto fileData = fopen(pathData, "r");
+	for (int i = 0; i < n; i++)
+		fscanf(fileData, "%f %f %d\n", &data[i * d], &data[i * d + 1], &label[i]);
 	fclose(fileData);
 
 	// Export ground truth
@@ -36,31 +36,31 @@ int main(int argc, char* argv[]) {
 	// Normalize
 	// --------------------------------------------------------------------------------
 
-	float least[numDim], most[numDim];
+	float least[d], most[d];
 	const auto infinity = std::numeric_limits<float>::infinity();
-	std::fill(least, least + numDim, infinity);
-	std::fill(most, most + numDim, -infinity);
-	for (int i = 0; i < numPoint; i++)
-		for (int j = 0; j < numDim; j++) {
-			least[j] = std::min(least[j], data[i * numDim + j]);
-			most[j] = std::max(most[j], data[i * numDim + j]);
+	std::fill(least, least + d, infinity);
+	std::fill(most, most + d, -infinity);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < d; j++) {
+			least[j] = std::min(least[j], data[i * d + j]);
+			most[j] = std::max(most[j], data[i * d + j]);
 		}
-	for (int i = 0; i < numPoint; i++)
-		for (int j = 0; j < numDim; j++)
-			data[i * numDim + j] = (data[i * numDim + j] - least[j]) / (most[j] - least[j]);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < d; j++)
+			data[i * d + j] = (data[i * d + j] - least[j]) / (most[j] - least[j]);
 
 	// Do the magic
 	// --------------------------------------------------------------------------------
 
 	const auto time = high_resolution_clock::now();
-	const auto[centroid, assignment] = SNNDPC(k, numPoint, numDim, numCentroid, data);
+	const auto [centroid, assignment] = SNNDPC(k, n, d, nc, data);
 	printf("Time Cost = %lldms\n", duration_cast<milliseconds>(high_resolution_clock::now() - time).count());
 
 	// Export centroid
 	// --------------------------------------------------------------------------------
 
 	const auto fileCentroid = fopen(SOLUTION_DIR"temp/Centroid.txt", "w");
-	for (int i = 0; i < numCentroid; i++)
+	for (int i = 0; i < nc; i++)
 		fprintf(fileCentroid, "%d\n", centroid[i]);
 	fclose(fileCentroid);
 
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
 
 	const auto pathAssignment = SOLUTION_DIR"temp/Assignment.txt";
 	const auto fileAssignment = fopen(pathAssignment, "w");
-	for (int i = 0; i < numPoint; i++)
+	for (int i = 0; i < n; i++)
 		fprintf(fileAssignment, "%d\n", assignment[i]);
 	fclose(fileAssignment);
 
