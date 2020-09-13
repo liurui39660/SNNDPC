@@ -11,8 +11,8 @@ If you use Windows:
 1. Open a Visual Studio developer command prompt (prefer x64 native)
 1. `cd` to project root `SNNDPC/`
 1. `cmake -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" -S . -B build\release`
-1. `cmake --build build\release --target CPU_Demo`
-1. `build\release\CPU\CPU_Demo.exe`
+1. `cmake --build build\release --target Demo`
+1. `build\release\src\Demo.exe`
 
 The demo runs on the S2 dataset with OpenMP enabled.
 
