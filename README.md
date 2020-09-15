@@ -8,7 +8,8 @@ The Matlab version is moved to the branch [`MatlabImplementation`](https://githu
 
 If you use Windows:
 
-1. Open a Visual Studio developer command prompt (prefer x64 native)
+1. Open a Visual Studio developer command prompt
+    - Because of the toolchain paths
 1. `cd` to project root `SNNDPC/`
 1. `cmake -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" -S . -B build\release`
 1. `cmake --build build\release --target Demo`
@@ -24,10 +25,9 @@ To use other datasets, see [Customization](#customization)
 
 Some highlighted requirements.
 
-- Python: 3.8
-- Vcpkg
-    - Intel TBB: Optional, for parallelization
-    - OpenMP: Optional, for parallelization
+- Python: 3.8, because of `:=` syntax
+- IntelTBB: Optional, for parallelization
+- OpenMP: Optional, for parallelization
 
 ## Customization
 
@@ -35,7 +35,7 @@ Some highlighted requirements.
 
 To use other provided datasets in demo:
 
-1. Modify variable `pathData` at `SNNDPC/Demo.cpp:14`.
+1. Modify variable `pathData` at `SNNDPC/Demo.cpp:11`.
 	- Macro `SOLUTION_DIR` is the absolute path to `SNNDPC/`. 
 1. Modify variables `k`, `n`, `d`, and `nc` according to the paper
 
